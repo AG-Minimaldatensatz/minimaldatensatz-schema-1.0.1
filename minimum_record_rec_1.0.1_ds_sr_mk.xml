@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Copyright (Simon Sendler 2022–2023).
+	Licensed under the EUPL–1.2 or later.
+	Adapted and extended to Minimum Record Recommendation (LIDO 1.1)  https://doi.org/10.5281/zenodo.12759620
+	(c) by Marco Klindt, 2024
+-->
+<lidoProfile xmlns="http://www.lido-schema.org/lidoProfile/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lido="http://www.lido-schema.org"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+	xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<schemaMeta xml:lang="en">
+		<URI LOCTYPE="OTHER">Minimum_Record_Recommendation_1.0.1</URI>
+		<title xml:lang="en">Minimum Record Recommendation for Museums and Collections 1.0.1</title>
+		<author xml:id="author01"> Marchini, Chiara</author>
+		<author xml:id="author02">Städtler, Domenic</author>
+		<author xml:id="author03">Greisinger, Sybille</author>
+		<author xml:id="author04">Böhm, Elisabeth</author>
+		<author xml:id="author05">Bernhard, Anne-Marie</author>
+		<author xml:id="author06">Götsch, Stephanie</author>
+		<author xml:id="author07">Gerber, Anja</author>
+		<author xml:id="author08">Grotrian, Etta</author>
+		<author xml:id="author09">von Hagel, Frank</author>
+		<author xml:id="author10">Kailus, Angela</author>
+		<author xml:id="author11">Koch, Anne-Katrin</author>
+		<author xml:id="author12">Kudlinski, Vera</author>
+		<author xml:id="author13">Nowicki, Anna-Lena</author>
+		<author xml:id="author14">Purschwitz, Anne</author>
+		<author xml:id="author15">Quade, Lisa</author>
+		<author xml:id="author16">Rohde-Enslin, Stefan</author>
+		<author xml:id="author17">Rölle, Sophie</author>
+		<author xml:id="author18">Städing, Lukas</author>
+		<author xml:id="author19">Stricker, Martin</author>
+		<author xml:id="author20">Thorn, Caitlin</author>
+		<author xml:id="author21">Wagner, Sarah</author>
+		<author xml:id="author22">Winkler, Alexander</author>
+		<author xml:id="author23">Wassermann, Sarah </author>
+		<contributor xml:id="editor1" role="editor">Marco Klindt (digiS)</contributor>
+		<publisher>Minimum Record Working Group</publisher>
+		<licence target="https://creativecommons.org/publicdomain/zero/1.0/deed.de">Public Domain
+			Dedication</licence>
+		<date when-iso="2024-09-16">16 September 2024</date>
+		<revision>
+			<!-- at least 1 change/@n must be present -->
+			<!-- change/@n must conform to the format: n.n -->
+			<change n="1.1" when="2024-06-13" who="#editor1">Version for LIDO 1.1</change>
+		</revision>
+		<abstract>The Minimum Record Recommendation is intended to support museums in setting the
+			course for more consistent and higher-quality data right from the start. It assists them
+			in gradually integrating controlled vocabularies into their documentation and
+			publication practice, thus preparing their valuable data sets for up-to-date Linked Open
+			Data scenarios.</abstract>
+	</schemaMeta>
+	<schemaDoc xml:lang="en">
+		<tei:text>
+			<tei:div type="guideline_introduction">
+				<tei:head>Introduction</tei:head>
+				<tei:p>This is the implementation of <tei:choice>
+						<tei:abbr>MRR</tei:abbr>
+						<tei:expan>Minimum Record Recommendation</tei:expan>
+					</tei:choice>. The profile creation workflow will use the information provided
+					in <tei:gi>https://www.minimaldatensatz.de</tei:gi> to create a basic HTML
+					documentation to accompany the profile XSD. </tei:p>
+			</tei:div>
+			<tei:div type="guideline_elements">
+				<tei:head>Changes to the Schema</tei:head>
+				<!-- <profile:document mode="replace"></profile:document> -->
+			</tei:div>
+		</tei:text>
+	</schemaDoc>
+	<schemaSpec base="lido-v1.1.xsd">
+		<!-- <elementSpec xml:id="lido:applicationProfile"
+			mode="replace"
+			name="applicationProfile"
+			minOccurs="1"
+			maxOccurs="">
+			<xs:annotation>
+				<xs:documentation>
+					<tei:ab type="description">The LIDO profile to which this record adheres.</tei:ab>
+					<tei:ab type="dataValues">Controlled format</tei:ab>
+				</xs:documentation>
+			</xs:annotation>
+		</elementSpec> -->
+
+		<!-- mds0010 -->
+		<elementSpec xml:id="lido:eventSet" mode="replace" name="eventSet"
+			type="lido:eventSetComplexType" minOccurs="1" maxOccurs="unbounded"/>
+
+		<!-- mds0015 -->
+		<elementSpec xml:id="lido:rightsResource" mode="replace" name="rightsResource"
+			type="lido:rightsComplexType" minOccurs="1" maxOccurs="1"/>
+
+		<!-- mds0018 -->
+		<elementSpec xml:id="lido:lidoRecID" mode="replace" name="lidoRecID"
+			type="lido:identifierComplexType" minOccurs="1" maxOccurs="1"/>
+
+		<!-- mds0023 -->
+		<elementSpec xml:id="lido:resourceType" mode="replace" name="resourceType"
+			type="lido:conceptComplexType" minOccurs="1" maxOccurs="1"/>
+
+		<!-- mds0024 -->
+		<elementSpec xml:id="lido:recordRights" mode="replace" name="recordRights"
+			type="lido:rightsComplexType" minOccurs="1" maxOccurs="1"/>
+		<!--SR: Müssten hier nicht noch repositorySet (mds0021) & linkResource> (mds0014) geprüft werden? -->
+	
+		<constraintSpec xml:id="MDS_Schematron_patterns" mode="add">
+			<constraint>
+				<sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+				<sch:pattern>
+
+					<sch:rule context="lido:lido" role="warn">
+
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectClassificationWrap/lido:objectWorkTypeWrap/lido:objectWorkType/skos:Concept"
+							> mds0002: objectWorkType should prefer an URI from a controlled
+							vocabulary.</sch:assert>
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectClassificationWrap/lido:classificationWrap/lido:classification[count(lido:conceptID|skos:Concept) &gt; 0]"
+							> mds0003: A classification is recommended.</sch:assert>
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectIdentificationWrap/lido:objectDescriptionWrap/lido:objectDescriptionSet/lido:descriptiveNoteValue"
+							> mds0005: A description is recommended.</sch:assert>
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectIdentificationWrap/lido:objectMaterialsTechWrap/lido:objectMaterialsTechSet/lido:materialsTech/lido:termMaterialsTech[@lido:type='http://terminology.lido-schema.org/lido00132'][lido:conceptID|skos:Concept] or
+							lido:descriptiveMetadata/lido:eventWrap/lido:eventSet/lido:event/lido:eventMaterialsTech/lido:materialsTech/lido:termMaterialsTech[@lido:type='http://terminology.lido-schema.org/lido00132'][lido:conceptID|skos:Concept]"
+							> mds0006: Use of information from controlled ocabulary about materials utilized is
+							recommended.</sch:assert>
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectIdentificationWrap/lido:objectMaterialsTechWrap/lido:objectMaterialsTechSet/lido:materialsTech/lido:termMaterialsTech[@lido:type='http://terminology.lido-schema.org/lido00131'][lido:conceptID|skos:Concept] or
+							lido:descriptiveMetadata/lido:eventWrap/lido:eventSet/lido:event/lido:eventMaterialsTech/lido:materialsTech/lido:termMaterialsTech[@lido:type='http://terminology.lido-schema.org/lido00131'][lido:conceptID|skos:Concept]"
+							> mds0007: Use of information from controlled ocabulary about techniques employed is
+							recommended.</sch:assert>
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectIdentificationWrap/lido:objectMeasurementsWrap/lido:objectMeasurementsSet or 
+						lido:descriptiveMetadata/lido:eventWrap/lido:eventSet/lido:event/lido:eventMeasurements"
+							> mds0008: Measurements are recommended.</sch:assert>
+						<sch:assert
+							test="lido:descriptiveMetadata/lido:objectRelationWrap/lido:subjectWrap/lido:subjectSet/lido:subject/lido:subjectConcept[lido:conceptID|skos:Concept]"
+							> mds0013: Subject headings (concepts) are recommended.</sch:assert>
+						<sch:assert
+							test="lido:administrativeMetadata/lido:recordWrap/lido:recordInfoSet[@lido:type='http://terminology.lido-schema.org/lido00470']/lido:recordMetadataDate[@lido:type='http://terminology.lido-schema.org/lido00472']"
+							> mds0026: An export date/time stamp is recommended.</sch:assert>
+						<sch:assert
+							test="lido:administrativeMetadata/lido:recordWrap/lido:recordInfoSet/lido:recordInfoLink"
+							> mds0025: Link to record (recordInfoLink) recommended.</sch:assert>
+						<sch:assert test="lido:lidoRecID[string(normalize-space(text()))] and lido:administrativeMetadata/lido:recordWrap/lido:recordID[string(normalize-space(text()))]" role="fatal"
+							> mds0018: Each record has to have non-null lidoRecID and recordID Identifiers.</sch:assert>
+						<!-- additional sanity checks; explicitly checked in other rules
+						<rule context="lido:appellationValue|lido:conceptID|lido:descriptiveNoteValue|lido:legalBodyID|lido:term|lido:workID">
+							<assert test="string(normalize-space(text()))"><value-of select="name()"/> must have a non-empty value.</assert>
+						</rule> -->
+					</sch:rule>
+					
+					<sch:rule context="lido:titleSet" role="error">
+						<sch:assert test="lido:appellationValue[string(normalize-space(text()))]"
+							> mds0001: A object title or appellation is required.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:objectWorkType" role="warn">
+						<sch:assert
+							test="matches(skos:Concept/@rdf:about, '^http.?://(w{3}\.)?([\w-]+\.)+(\w{2})(/[\w\.-]+)*')"
+							> mds0002: Use of URI in objectWorkType is strongly
+							recommended.</sch:assert>
+					</sch:rule>
+
+					<sch:rule
+						context="lido:repositorySet[@lido:type='http://terminology.lido-schema.org/lido00475' or @lido:type='http://terminology.lido-schema.org/lido01017']"
+						role="fatal">
+						<sch:assert test="lido:workID"> mds0004: A current repository work id is
+							required.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:objectDescriptionSet" role="warn">
+						<sch:assert test="lido:objectDescriptionRights"> mds0005: A
+							rightsDescription for an objectDescription is recommended. </sch:assert>
+					</sch:rule>
+					
+					<sch:rule context="lido:eventObjectMeasurements|lido:objectMeasurementSet"
+						role="warn">
+						<sch:assert test="lido:objectMeasurements/lido:measurementsSet"> mds0008:
+							Full measurement information is recommended.</sch:assert>
+					</sch:rule>
+
+					<sch:rule
+						context="lido:objectMeasurements/lido:measurementsSet/lido:measurementUnit"
+						role="warn">
+						<sch:assert test="skos:Concept"> mds0008: skos:Concept is preferred for
+							measurement units.</sch:assert>
+					</sch:rule>
+
+					<sch:rule
+						context="lido:objectMeasurements/lido:measurementsSet/lido:measurementValue"
+						role="fatal">
+						<sch:assert test="matches(., '^[0-9]*[.,]?[0-9]*$')"> mds0008: Use only
+							(decimal) numbers.</sch:assert>
+						<!-- <sch:assert test="matches(., '^[0-9]*[.]?[0-9]*$')"> mds0008: For
+							international interoperability use the "." as decimal
+							point.</sch:assert> -->
+					</sch:rule>
+
+					<sch:rule context="lido:subjectSet/lido:subject" role="warn">
+						<sch:assert test="count(lido:subjectConcept) &lt; 2"> mds0013: Use of only one
+							subjectConcept per subjectSet recommended.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:subjectConcept/skos:Concept/@rdf:about" role="fatal">
+						<sch:assert test=". != //lido:objectWorkType/skos:Concept/@rdf:about">
+							mds0013: Use only concepts/subject headings that are disctinct from
+							objectWorkType.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:actorInRole" role="warn">
+						<sch:assert test="lido:actor/lido:actorID"> mds0010: It is recommended to
+							provide an identifier for <sch:name/>.</sch:assert>
+						<sch:assert test="lido:roleActor"> mds0010: It is recommended to provide
+							information about the role for <sch:name/>.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:eventDate/lido:date" role="fatal">
+						<sch:assert
+							test="matches(lido:earliestDate, '^([−\-])?\d{4,8}(-\d\d(-\d\d(T\d\d:\d\d(:\d\d)?(\.\d+)?(([+-]\d\d:\d\d)|Z)?)?)?)?$')"
+							> mds0011: It is recommended to use an ISO date format for <sch:name/>. </sch:assert>
+						<sch:assert
+							test="matches(lido:latestDate, '^([−\-])?\d{4,8}(-\d\d(-\d\d(T\d\d:\d\d(:\d\d)?(\.\d+)?(([+-]\d\d:\d\d)|Z)?)?)?)?$')"
+							> mds0011: It is recommended to use an ISO date format for <sch:name/>.
+						</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:event" role="fatal">
+						<sch:assert test="lido:eventType"> mds0009: It is required to provide an
+							event type for <sch:name/> via lido:eventType. LIDO terminology is recommended.</sch:assert>
+						<sch:assert test="lido:eventActor or lido:eventDate or lido:eventPlace">
+							mds0010: Each event has to have at least either an eventActor, an
+							eventDate or an eventPlace.</sch:assert>
+					</sch:rule>
+			
+					<sch:rule context="lido:event/lido:eventType/skos:Concept" role="fatal">
+						<sch:assert
+							test="starts-with(@rdf:about, 'http://terminology.lido-schema.org/lido')"
+							role="warn"> mds0009: EventType should use lido
+							terminology.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:eventPlace/lido:place" role="warn">
+						<sch:assert test="lido:placeID and lido:namePlaceSet"> mds0012: Providing
+							both an identifier and a name for a place is recommended for
+							<sch:name/>.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:resourceSet">
+						<!--
+						<sch:assert test="count(lido:rightsResource) &gt; 0" role="fatal"> mds0015:
+							RightsResource statement is mandatory.</sch:assert> -->
+						<sch:assert test="lido:resourceDescription" role="warn"> mds0017: A
+							resourceDescription (alt-text) is recommended.</sch:assert>
+					</sch:rule>
+				
+					<sch:rule context="lido:rightsResource/lido:rightsType" role="warn">
+						<sch:assert test="@lido:type='http://terminology.lido-schema.org/lido00921'"
+							> mds0015: RightsResource statement type should be specific
+							(http://terminology.lido-schema.org/lido00921).</sch:assert>
+					</sch:rule>               
+
+					<!-- Canonical URI for PDM is "http" -->
+					<sch:rule
+						context="lido:rightsResource[lido:rightsType/skos:Concept[@rdf:about='http://creativecommons.org/publicdomain/mark/1.0/']]"
+						role="fatal">
+						<sch:assert test="count(lido:rightsHolder)=0"> mds0016: There should be no
+							rightsHolder for public domain material.</sch:assert>
+					</sch:rule>
+
+					<sch:rule
+						context="lido:rightsResource[lido:rightsType/skos:Concept[@rdf:about!='http://creativecommons.org/publicdomain/mark/1.0/']]"
+						role="fatal">
+						<sch:assert test="count(lido:rightsHolder) &gt; 0"> mds0016: RightsHolder
+							mandatory for non public domain material even if not known.</sch:assert>
+					</sch:rule>
+
+
+					<sch:rule context="lido:recordWrap/skos:Concept" role="fatal">
+						<sch:assert
+							test="@rdf:about[.='http://terminology.lido-schema.org/lido00141' or .='http://terminology.lido-schema.org/lido00453' or
+						.='http://terminology.lido-schema.org/lido01021' or .='http://terminology.lido-schema.org/lido00447']"
+							> mds0020: recordType must be either item, component, conceptual or
+							group level record type.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:classification" role="warn">
+						<sch:assert
+							test="starts-with(@lido:type, 'http://terminology.lido-schema.org/lido')"
+							> mds0003: <sch:name/> @type should use lido terminology. </sch:assert>
+					</sch:rule>
+					
+					<sch:rule context="lido:repositorySet/lido:repositoryName">
+						<sch:assert test="count(lido:legalBodyID[@lido:type='http://terminology.lido-schema.org/lido00099']) &gt; 0" role="fatal"
+							> mds0021: A repository ID (URI) is required.</sch:assert>
+						<sch:assert test="lido:legalBodyName" role="warn"> mds0021: A name for the
+							repository is recommended.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:repositoryWrap">
+						<sch:assert test="count(lido:repositorySet) &gt; 0" role="fatal"> mds0021:
+							At least one repository set required.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:recordSource">
+						<sch:assert test="lido:legalBodyID[string(normalize-space(text())) and @lido:type='http://terminology.lido-schema.org/lido00099']">
+							mds0022: Identifier for data source of record required.</sch:assert>
+					</sch:rule>
+
+					<sch:rule context="lido:metaDataDate" role="fatal">
+						<sch:assert
+							test="matches(., '^\d{4}(-\d\d(-\d\d(T\d\d:\d\d(:\d\d)?(\.\d+)?(([+-]\d\d:\d\d)|Z)?)?)?)?$')"
+							> mds0026: Must use an ISO date format for <sch:name/>. </sch:assert>
+					</sch:rule>
+
+					<rule context="lido:titleSet">
+						<assert test="@lido:type">Title sets should have @lido:type specified.</assert>
+						<assert test="lido:appellationValue/@xml:lang">The language of each title
+							should be specified.</assert>
+					</rule>
+				</sch:pattern>
+			</constraint>
+		</constraintSpec>
+	</schemaSpec>
+</lidoProfile>
